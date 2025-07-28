@@ -45,14 +45,14 @@ A lightweight, high-performance proxy server that restores the original HTTP met
 ### Using npx (Recommended)
 
 ```bash
-npx ollama-proxy
+npx ollama-proxy-fix
 ```
 
 ### Using npm
 
 ```bash
-npm install -g ollama-proxy
-ollama-proxy
+npm install -g ollama-proxy-fix
+ollama-proxy-fix
 ```
 
 ### From Source
@@ -96,7 +96,7 @@ OLLAMA_PORT=11434
 
 ```bash
 # Start the proxy server
-npx ollama-proxy
+npx ollama-proxy-fix
 
 # The server will start on port 4000 (or your configured port)
 # Proxying requests to Ollama at localhost:11434
@@ -215,16 +215,6 @@ The proxy includes built-in CORS headers for cross-origin requests:
 3. **Invalid JSON Body (400)**
    - Ensure request body is valid JSON
    - Check `Content-Type` header is set to `application/json`
-
-### Debug Mode
-
-Enable detailed logging by setting the log level:
-
-```bash
-# Set log level (if supported by your environment)
-export DEBUG=ollama-proxy:*
-npx ollama-proxy
-```
 
 ## 📊 Performance
 
