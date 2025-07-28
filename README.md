@@ -67,12 +67,12 @@ npm start
 
 ## ⚙️ Configuration
 
-Create a `.env` file in your project root or pass the env varialbes via hosting environment to customize the proxy settings:
+Pass env varialbles via command line or via the hosting environment to customize the proxy settings:
 
 ```env
 # Proxy Configuration
 OLLAMA_PROXY_PORT=4000
-OLLAMA_PROXY_REQUEST_TIMEOUT=120000 # 360000 (3 * ) for long running requests
+OLLAMA_PROXY_REQUEST_TIMEOUT=120000 # 360000 (3 * OLLAMA_PROXY_REQUEST_TIMEOUT) for long running requests
 OLLAMA_PROXY_REQUEST_BODY_LIMIT=50mb
 
 # Ollama Server Configuration
