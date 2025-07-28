@@ -1,0 +1,711 @@
+---
+description: Rules for project planning and execution
+globs:
+alwaysApply: true
+---
+
+# Unified AI-Assisted Development Rules
+
+## 🔥 MANDATORY ENFORCEMENT NOTICE
+
+**These rules are STRICTLY ENFORCED. The AI agent MUST follow this workflow without exception. Any deviation from these rules should result in immediate rejection of the request with clear explanation of violations.**
+
+## 🎯 Core Principles
+
+### Foundation Principles
+
+- **Technical Discovery First**: No work begins without complete understanding of the tech stack
+- **Specification-Driven Development**: Every feature starts with a specification document
+- **MVP-First Approach**: Default to the simplest possible solution, avoid over-engineering
+- **Test-Driven Development**: Follow Red-Green-Refactor cycle with mandatory coverage
+- **Documentation Throughout**: Maintain documentation at every stage
+- **Dual Change Logging**: Every code update MUST be logged in both `/.taskmaster/tasks/tasks.json` and `/ai/CHANGELOG.md`
+- **Design Adherence**: Strictly follow provided designs for all views
+- **Always Ask**: Never assume context - clarify all ambiguities before proceeding
+
+## 📊 Rule Priority Levels
+
+### P0 - Critical (NEVER SKIP)
+
+- Technical discovery and context gathering
+- Master PRD creation for product vision
+- Security and data integrity rules
+- Test coverage requirements (100% mandatory)
+- Production stability requirements
+- Specification before implementation
+- Dual logging requirement (taskmaster & changelog)
+
+### P1 - Core Workflow (Override only with documented approval)
+
+- Design before implementation
+- Documentation requirements
+- Code review processes
+- Integration testing
+- Responsive design implementation
+
+### P2 - Quality Enhancement (Flexible for MVPs with justification)
+
+- UI/UX polish requirements
+- Performance optimizations (non-critical)
+- Extended browser compatibility
+- Nice-to-have documentation
+
+**Override Protocol**: P1 and P2 rules may only be overridden with written stakeholder approval and documented technical debt plan.
+
+## 🚀 Phase 0: Technical Discovery & Context Gathering [P0]
+
+### MANDATORY FIRST STEP - NO EXCEPTIONS
+
+1. **Source Intake & Context Collection**
+   - [ ] Request and confirm ALL project sources:
+     - Design files (Figma, Adobe XD, Sketch links)
+     - Reference materials (screenshots, wireframes, inspirational sites)
+     - Technical requirements documents
+     - Existing codebase (if any)
+2. **Technical Stack Discovery**
+   - [ ] Identify and catalog:
+     - Programming language(s) and versions
+     - Framework(s) and versions
+     - Database type and version
+     - Testing frameworks in use
+     - Build tools and package managers
+     - Deployment platform and CI/CD pipeline
+     - Code style and linting configurations
+     - Asset storage paths (e.g., `/public/assets`)
+
+3. **Commit Technical Context**
+   - [ ] Save complete tech stack information in `/ai/project-log.md`
+   - [ ] Understand project architecture patterns
+   - [ ] Identify existing code conventions
+   - [ ] Note custom tooling or configurations
+   - [ ] Validate requirements compatibility
+
+**The agent MUST refuse to proceed with any development tasks until technical discovery is complete.**
+
+### Important Format Requirements
+
+- **All specifications**: Must be in Markdown format (.md files)
+- **All design documentation**: Must be in Markdown format (.md files)
+- **No binary files**: No Figma files, images should be referenced via links or stored in `/public/assets/`
+
+## 📁 Project File Structure
+
+### Task Management System Clarification
+
+**Single Source of Truth: `/.taskmaster/tasks/tasks.json`**
+
+- Managed via taskmaster-ai MCP (Model Context Protocol)
+- Contains all features, epics, and subtasks
+- Tracks overall project progress and dependencies
+- Updated when tasks are completed
+
+**Execution Tracking: `/ai/plans/YYYYMMDD_HHMMSS_plan.md`**
+
+- Timestamped execution plans for implementing specific tasks
+- Created when starting work on a task from tasks.json
+- Contains detailed implementation strategy
+- References the task being implemented
+  /project-root
+  ├── /public/assets/ # Static assets
+  │ ├── images/ # Image files
+  │ └── icons/ # Icon files
+  ├── /src/ # Source code
+  │ ├── components/ # UI components
+  │ └── elements/ # Reusable elements
+  ├── /tests/ # Test files
+  │ ├── unit/ # Unit tests
+  │ ├── integration/ # Integration tests
+  │ ├── e2e/ # End-to-end tests
+  │ └── fixtures/ # Test data
+  ├── /ai/ # ALL AI development artifacts
+  │ ├── specs/ # Specification documents
+  │ │ ├── features/ # Feature specifications
+  │ │ ├── apis/ # API specifications (OpenAPI)
+  │ │ ├── database/ # Database schema specifications
+  │ │ ├── ui/ # UI/UX specifications
+  │ │ └── architecture/ # System architecture specs
+  │ ├── design/ # Design artifacts
+  │ │ ├── wireframes/ # UI wireframes
+  │ │ ├── mockups/ # Visual designs
+  │ │ ├── user-flows/ # User journey diagrams
+  │ │ └── system-design/ # Technical design documents
+  │ ├── tasks/ # Task management
+  │ │ ├── tasks.json # Master task list (single source of truth)
+  │ │ └── executions/ # Timestamped execution checklists
+  │ ├── plans/ # Timestamped development plans
+  │ ├── docs/ # Project documentation
+  │ │ └── prd.txt # Product Requirements Document
+  │ ├── theme.ts # Global theme configuration
+  │ ├── project-log.md # Project context and sources
+  │ └── CHANGELOG.md # Detailed change log
+
+````
+
+## 📋 Phase 1: Planning & Specification [P0]
+
+### Step 2: Asset Management & Theme Configuration
+- [ ] Download all required assets from design files
+- [ ] Organize in confirmed asset path structure
+- [ ] Match folder structure to component structure (co-location)
+- [ ] Extract design tokens from designs: colors, typography, breakpoints, spacing
+- [ ] Create `/ai/theme.ts` with centralized configuration
+- [ ] Ensure theme aligns with design principles in master PRD
+
+### Step 3: Master Product Requirements Document
+- [ ] Create comprehensive `/ai/specs/prd.md` that provides full product context
+- [ ] This master PRD serves as the foundation for all feature specifications
+- [ ] All feature PRDs must align with and reference this master document
+
+**Master PRD Template (`/ai/specs/prd.md`):**
+```markdown
+# [Product Name] - Master Product Requirements Document
+
+Last Updated: YYYY-MM-DD
+Version: X.X
+
+## Executive Summary
+[2-3 paragraph overview of the product, its purpose, and key value propositions]
+
+## Product Vision & Strategy
+
+### Vision Statement
+[One sentence describing the long-term vision]
+
+### Mission Statement
+[How we will achieve the vision]
+
+### Strategic Goals
+1. [Primary goal]
+2. [Secondary goal]
+3. [Tertiary goal]
+
+## Market Analysis
+
+### Target Market
+- Primary audience: [Description]
+- Secondary audience: [Description]
+- Market size: [Data]
+
+### Competitive Analysis
+| Competitor | Strengths | Weaknesses | Our Differentiation |
+|------------|-----------|------------|-------------------|
+| [Name]     | [List]    | [List]     | [How we're different] |
+
+### User Personas
+1. **[Persona Name]**
+   - Demographics: [Details]
+   - Goals: [What they want to achieve]
+   - Pain points: [Current frustrations]
+   - How our product helps: [Solution]
+
+## Product Overview
+
+### Core Value Propositions
+1. [Value prop 1]
+2. [Value prop 2]
+3. [Value prop 3]
+
+### High-Level Features
+1. **[Feature Category 1]**
+   - [Sub-feature 1.1]
+   - [Sub-feature 1.2]
+2. **[Feature Category 2]**
+   - [Sub-feature 2.1]
+   - [Sub-feature 2.2]
+
+### User Journey Overview
+[High-level description of the main user flow through the product]
+
+## Technical Architecture Overview
+
+### Technology Stack
+- Frontend: [Framework, version]
+- Backend: [Framework, version]
+- Database: [Type, version]
+- Infrastructure: [Cloud provider, services]
+- Key integrations: [Third-party services]
+
+### System Architecture
+[High-level architecture diagram description or ASCII art]
+
+### Scalability Considerations
+- Expected load: [Metrics]
+- Performance targets: [Specific goals]
+- Growth projections: [Timeline]
+
+## Product Roadmap
+
+### Phase 1: MVP (Timeline)
+- Core features: [List]
+- Success criteria: [Metrics]
+
+### Phase 2: Enhancement (Timeline)
+- Additional features: [List]
+- Success criteria: [Metrics]
+
+### Phase 3: Scale (Timeline)
+- Advanced features: [List]
+- Success criteria: [Metrics]
+
+## Success Metrics & KPIs
+
+### Business Metrics
+- [Metric 1]: Target value
+- [Metric 2]: Target value
+
+### User Engagement Metrics
+- [Metric 1]: Target value
+- [Metric 2]: Target value
+
+### Technical Performance Metrics
+- [Metric 1]: Target value
+- [Metric 2]: Target value
+
+## Constraints & Assumptions
+
+### Constraints
+- Budget: [Limitations]
+- Timeline: [Deadlines]
+- Technical: [Limitations]
+- Legal/Compliance: [Requirements]
+
+### Assumptions
+- Market assumptions: [List]
+- User behavior assumptions: [List]
+- Technical assumptions: [List]
+
+## Risks & Mitigation Strategies
+
+### High Priority Risks
+1. **[Risk Name]**
+   - Impact: [Description]
+   - Mitigation: [Strategy]
+
+### Medium Priority Risks
+1. **[Risk Name]**
+   - Impact: [Description]
+   - Mitigation: [Strategy]
+
+## Compliance & Security Requirements
+
+### Regulatory Compliance
+- [Regulation 1]: Requirements
+- [Regulation 2]: Requirements
+
+### Security Requirements
+- Authentication: [Method]
+- Authorization: [Model]
+- Data protection: [Approach]
+- Privacy: [Standards]
+
+## Design Principles
+
+### User Experience Principles
+1. [Principle 1]
+2. [Principle 2]
+3. [Principle 3]
+
+### Technical Design Principles
+1. [Principle 1]
+2. [Principle 2]
+3. [Principle 3]
+
+## Glossary
+- **[Term 1]**: Definition
+- **[Term 2]**: Definition
+
+## Appendices
+
+### A. Reference Documents
+- [Document 1]: Link/Location
+- [Document 2]: Link/Location
+
+### B. Stakeholder Sign-off
+- Product Owner: [Name] - [Date]
+- Technical Lead: [Name] - [Date]
+- Design Lead: [Name] - [Date]
+````
+
+### Step 2: Asset Management & Theme Configuration
+
+- [ ] Download all required assets from design files
+- [ ] Organize in confirmed asset path structure
+- [ ] Match folder structure to component structure (co-location)
+- [ ] Extract design tokens from designs: colors, typography, breakpoints, spacing
+- [ ] Create `/ai/theme.ts` with centralized configuration
+- [ ] Ensure theme aligns with design principles in master PRD
+
+### Step 3: Feature Specification with PRD
+
+Before ANY code is written, create feature specifications in `/ai/specs/features/` using this template (all in markdown):
+
+```markdown
+# Feature Name
+
+## Product Requirements Document (PRD)
+
+**Reference**: This feature aligns with the Master PRD at `/ai/specs/prd.md`
+
+### Overview
+
+Brief description and vision for the feature
+
+### Alignment with Product Vision
+
+[How this feature supports the overall product vision from master PRD]
+
+### Business Context
+
+- Problem statement
+- Target users (reference personas from master PRD)
+- Success metrics
+- Business value
+
+### Core Requirements
+
+- Must-have features
+- Nice-to-have features
+- Out of scope
+
+## User Stories
+
+- As a [user type], I want [goal] so that [benefit]
+
+## Acceptance Criteria
+
+- Given [context], when [action], then [outcome]
+
+## Technical Requirements
+
+- Functional requirements
+- Non-functional requirements
+- Dependencies
+- Performance criteria
+
+## API Endpoints (if applicable)
+
+- Method, path, request/response schemas
+
+## Database Changes (if applicable)
+
+- Schema modifications
+- Migration requirements
+
+## UI/UX Requirements
+
+- Layout specifications
+- Interaction patterns
+- Responsive requirements
+- Accessibility standards
+
+## Test Requirements
+
+- Unit test scenarios
+- Integration test cases
+- E2E test workflows
+- Coverage requirements (100%)
+
+## Development Phases
+
+- Phase 1: [Initial implementation]
+- Phase 2: [Enhancements]
+- Phase 3: [Polish and optimization]
+
+## Risks & Mitigations
+
+- Technical risks
+- Timeline risks
+- Mitigation strategies
+```
+
+### Step 4: Master Task Planning
+
+- [ ] Analyze master PRD and feature specifications to create `/.taskmaster/tasks/tasks.json`
+- [ ] Define hierarchical task structure with dependencies
+- [ ] Set clear acceptance criteria for each task
+- [ ] Establish priority levels and assignments
+- [ ] Align task priorities with product roadmap phases from master PRD
+
+Example `/.taskmaster/tasks/tasks.json` structure:
+
+```json
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Initialize Next.js Project",
+      "description": "Set up a new Next.js project with TypeScript and Tailwind",
+      "acceptanceCriteria": "...",
+      "priority": "high",
+      "status": "done",
+      "dependencies": [],
+      "subtasks": [],
+      "files": ["package.json", "tailwind.config.ts"],
+      "assignee": "ai-agent"
+    }
+  ],
+  "metadata": {
+    "created": "2025-07-14T16:05:00Z",
+    "updated": "2025-07-14T16:35:00Z",
+    "description": "Master task list for the project."
+  }
+}
+```
+
+## 🛠️ Phase 2: Development Execution Protocol
+
+### Development Workflow (For Each Task)
+
+#### 1. Task Initialization
+
+- [ ] Extract minimal MVP requirements from task specification
+- [ ] Create timestamped execution plan: `/ai/plans/YYYYMMDD_HHMMSS_plan.md`
+- [ ] Plan must reference the task ID from `/.taskmaster/tasks/tasks.json`
+- [ ] Include detailed implementation strategy and checklist in the plan
+
+**Execution Plan Template:**
+
+```markdown
+# Execution Plan: [Task Title]
+
+Task ID: #[ID from tasks.json]
+Created: YYYY-MM-DD HH:MM:SS
+Status: In Progress
+
+## Objective
+
+[Clear statement of what this plan will accomplish]
+
+## Implementation Strategy
+
+[High-level approach]
+
+## Execution Checklist
+
+- [ ] Step 1: [Specific action]
+- [ ] Step 2: [Specific action]
+- [ ] Step 3: [Specific action]
+      ...
+
+## Files to Create/Modify
+
+- [ ] /path/to/file1.tsx
+- [ ] /path/to/file2.test.ts
+      ...
+
+## Test Coverage Plan
+
+[How 100% coverage will be achieved]
+
+## Completion Criteria
+
+[What defines this task as done]
+```
+
+#### 2. Test-Driven Implementation (Red-Green-Refactor)
+
+**RED Phase - Write Failing Tests First**
+
+- Write tests that validate core requirements
+- Tests MUST fail initially
+- Focus on real user scenarios
+
+**GREEN Phase - Minimal Implementation**
+
+- Write simplest code to pass tests
+- Follow constraints:
+  - Functions: < 50 lines
+  - Files: < 500 lines
+  - One responsibility per function
+
+**REFACTOR Phase - Improve Structure**
+
+- Apply DRY principle (2+ repetitions)
+- Centralize configuration and constants
+- Favor composition over inheritance
+
+#### 3. Testing Requirements [P0]
+
+**Mandatory Coverage: 100% - NO EXCEPTIONS**
+
+**Testing Strategy:**
+
+- **Unit Tests**: Test all functions/methods
+- **Integration Tests**: Test API endpoints with real database
+- **E2E Tests**: Validate complete user workflows
+- **Quality Focus**: Tests must catch real bugs
+
+**Testing Rules:**
+
+- Use project's established testing frameworks
+- Mock ONLY external services (never internal logic)
+- Test both happy paths and edge cases
+- Include error condition testing
+- Maintain test watcher with `--bail` flag
+
+#### 4. Task Completion Protocol
+
+1. **Update Execution Plan**: Check off completed items in `/ai/plans/YYYYMMDD_HHMMSS_plan.md`
+2. **Run All Tests**: Ensure 100% pass rate
+3. **Update Master tasks.json**: Mark task as done in `/.taskmaster/tasks/tasks.json`
+4. **Update CHANGELOG.md**: Log in one-line in `/ai/CHANGELOG.md` with proper format:
+   ```
+   [YYYY-MM-DDTHH:MM:SSZ] - Description. [email] (Task: #ID.SUB_ID)
+   ```
+5. **Update Plan File**: List all created/modified files
+
+## 🚨 Strict Enforcement Protocols
+
+### Rule Violation Response Template
+
+```
+🚫 RULE VIOLATION DETECTED
+
+Violation: [Specific rule broken]
+Priority Level: [P0/P1/P2]
+Requirement: [What should have been done]
+Action Required: [Steps to correct]
+
+I cannot proceed until this requirement is met.
+```
+
+### Mandatory Quality Gates [P0]
+
+Before ANY code is considered complete:
+
+- [ ] Technical requirements understood and documented
+- [ ] Specifications exist and are approved
+- [ ] All tests pass with 100% coverage
+- [ ] Documentation is updated
+- [ ] Code follows established patterns exactly
+- [ ] Security scan passes (zero critical/high vulnerabilities)
+- [ ] Both `/.taskmaster/tasks/tasks.json` and `/ai/CHANGELOG.md` are updated
+
+## 📈 Continuous Improvement
+
+### Required Metrics Collection [P1]
+
+- Development velocity (spec to implementation time)
+- Test coverage maintenance (must stay at 100%)
+- Production incident frequency
+- Rule violation patterns
+- Technical debt accumulation
+
+### Feedback Loop Process
+
+- Monthly metrics dashboard updates
+- Quarterly rule effectiveness reviews
+- Data-driven rule adjustments
+- Best practice documentation
+
+## 🤖 Agent Behavior Rules
+
+### The Agent MUST:
+
+1. **Always begin with technical discovery** - refuse work without it
+2. **Demand specifications before coding** - no exceptions
+3. **Write tests achieving 100% coverage** - simultaneous with code
+4. **Follow exact tech stack from discovery** - no substitutions
+5. **Validate all quality gates** - comprehensive checking
+6. **Update both logging systems** - tasks.json AND CHANGELOG.md
+7. **Strictly adhere to provided designs** - pixel-perfect implementation
+8. **Stop and confirm at each phase** - no assumptions
+
+### The Agent MUST NEVER:
+
+1. Skip technical discovery phase
+2. Skip master PRD creation or ignore it
+3. Write code without specifications
+4. Accept less than 100% test coverage
+5. Use different frameworks than discovered
+6. Mark work complete with failing tests
+7. Compromise on security requirements
+8. Proceed without user confirmation at checkpoints
+
+## ✅ Development Checklist Template
+
+For every feature/task:
+
+- [ ] Technical context committed to memory
+- [ ] Master PRD (`/ai/specs/prd.md`) exists and provides product context
+- [ ] Feature specification with PRD exists and approved
+- [ ] Feature PRD aligns with master PRD vision
+- [ ] Design documentation created (if UI/UX involved)
+- [ ] Execution plan created with task reference
+- [ ] Tests written first (TDD approach)
+- [ ] Implementation follows MVP principle
+- [ ] 100% test coverage achieved
+- [ ] All tests passing
+- [ ] Documentation updated
+- [ ] Code reviewed against patterns
+- [ ] Security scan completed
+- [ ] `/.taskmaster/tasks/tasks.json` updated
+- [ ] `/ai/CHANGELOG.md` updated
+- [ ] Responsive design verified
+- [ ] Accessibility requirements met
+- [ ] Performance benchmarks passed
+
+## 🔄 Confirmation Protocol
+
+**Mandatory Confirmation Points:**
+
+1. After technical discovery completion
+2. After master PRD creation and approval
+3. After feature specification approval
+4. Before starting implementation
+5. After test suite creation
+6. Before marking task complete
+7. When encountering any ambiguity
+
+**Response Format for Confirmations:**
+
+```
+✋ CONFIRMATION REQUIRED
+
+Current Status: [What has been completed]
+Next Step: [What will be done next]
+Requirements: [What is needed from user]
+
+Please confirm to proceed or provide clarification.
+```
+
+## 📚 Quick Reference
+
+**Key Paths:**
+
+- **Master PRD**: `/ai/specs/prd.md` - Full product context and vision
+- **Task management**: `/.taskmaster/tasks/tasks.json` - Master task list via taskmaster-ai MCP
+- **Feature specs**: `/ai/specs/features/` - Feature-specific PRDs and specifications
+- **Design docs**: `/ai/design/` - UI/UX and system design documentation
+- **Execution plans**: `/ai/plans/` - Timestamped implementation strategies
+- **Change log**: `/ai/CHANGELOG.md` - Detailed change history
+- **All documentation**: In markdown format (.md files)
+
+**Key Distinctions:**
+
+- **Master PRD**: Overall product vision, strategy, and context
+- **Feature PRDs**: Specific feature requirements that align with master PRD
+- **Design docs** (`/ai/design/`): Created during planning for UI/UX and architecture
+- **Execution plans** (`/ai/plans/`): Created during implementation for specific tasks
+
+---
+
+**Remember**: This is a living document. Track metrics, gather feedback, and continuously improve the process while maintaining the non-negotiable P0 requirements.
+
+## 📖 PRD Hierarchy Explained
+
+**Master PRD (`/ai/specs/prd.md`)**
+
+- Single source of truth for product vision
+- Contains market analysis, user personas, and strategic goals
+- Defines overall product roadmap and success metrics
+- Must be created FIRST, before any feature work
+
+**Feature PRDs (in `/ai/specs/features/`)**
+
+- Each feature spec includes its own PRD section
+- Must reference and align with master PRD
+- Inherits user personas and strategic context from master
+- Defines feature-specific requirements and success criteria
+
+This hierarchy ensures all features contribute to the overall product vision and maintain consistency across the entire product.

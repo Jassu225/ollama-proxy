@@ -1,0 +1,69 @@
+{
+  "name": "ollama-proxy",
+  "version": "0.1.0",
+  "description": "An ollama proxy which restores the original http methods of the ollama API. Developed primarily for RunPod as it's built-in proxy strips the original http methods but can be used for any hosting service.",
+  "main": "./dist/index-v2.js",
+  "types": "dist/index-v2.d.ts",
+  "bin": {
+    "ollama-proxy": "./dist/index-v2.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index-v2.js",
+      "require": "./dist/index-v2.js",
+      "types": "./dist/index-v2.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "__tests__",
+    ".env.example",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "dev": "tsx watch src/index-v2.ts",
+    "build": "npm run clean && tsc",
+    "start": "node dist/index-v2.js",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "ollama",
+    "proxy",
+    "runpod",
+    "runpod-proxy",
+    "ollama-proxy",
+    "typescript",
+    "ollama-model",
+    "model",
+    "ai",
+    "openai"
+  ],
+  "author": "Jaswanth Sai Sattenapalli <jaswanthsaisattenapalli@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.0",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jassu225/ollama-proxy"
+  },
+  "homepage": "https://github.com/Jassu225/ollama-proxy/blob/main/README.md",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,7 @@
+- [x] Set up a new Node.js project with TypeScript and Express for the Ollama proxy server. Configure the project for development and testing.
+- [x] Implement endpoint-method mapping logic for all supported Ollama endpoints in the proxy server.
+- [x] Implement streaming proxy support for /api/chat and /api/generate endpoints, piping responses directly to the client.
+- [x] Forward headers and body as appropriate from incoming requests to the Ollama API, handling errors robustly.
+- [x] Add support for OpenAI-compatible endpoints (/v1/\*) in addition to native Ollama API endpoints.
+- [ ] Write unit and integration tests for endpoint-method mapping and streaming proxy logic. Achieve 100% test coverage.
+- [ ] Add basic logging and (optionally) rate limiting to the proxy server.

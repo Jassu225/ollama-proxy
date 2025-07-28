@@ -1,0 +1,9 @@
+.cursor
+.env.example
+.gitignore
+.npmignore
+.taskmaster
+ai
+node_modules
+package-lock.json
+TODO.md
