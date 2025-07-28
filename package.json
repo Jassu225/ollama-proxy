@@ -1,6 +1,6 @@
 {
   "name": "ollama-proxy-fix",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An ollama proxy which restores the original http methods of the ollama API. Developed primarily for RunPod as it's built-in proxy strips the original http methods but can be used for any hosting service.",
   "main": "./dist/index-v2.js",
   "types": "dist/index-v2.d.ts",
