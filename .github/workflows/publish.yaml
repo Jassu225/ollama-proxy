@@ -8,6 +8,11 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # This grants permission to create tags and releases
+      # If you were also interacting with issues or pull requests, you might add:
+      # issues: write
+      # pull-requests: writ
     steps:
       - uses: actions/checkout@v3
         with:
